@@ -1,13 +1,16 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.SITE_URL ?? "https://varsayilansite.com"
+      : "http://localhost:3000";
 
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/api/'],
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/admin/", "/api/"],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };

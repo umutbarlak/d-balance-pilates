@@ -1,57 +1,78 @@
-import Link from 'next/link';
-import { Phone, Mail, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import Link from "next/link";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Instagram,
+  Facebook,
+  Twitter,
+} from "lucide-react";
 
 const footerSections = [
   {
-    title: 'D-Balance Pilates',
+    title: "D-Balance Pilates",
     links: [
-      { label: 'Hakkımızda', href: '/hakkimizda' },
-      { label: 'Ekibimiz', href: '/ekibimiz' },
-      { label: 'Postür Değerlendirme', href: '/postur-degerlendirme' },
-      { label: 'İletişim', href: '/iletisim' },
+      { label: "Hakkımızda", href: "/hakkimizda" },
+      { label: "Ekibimiz", href: "/ekibimiz" },
+      { label: "Postür Değerlendirme", href: "/postur-degerlendirme" },
+      { label: "İletişim", href: "/iletisim" },
     ],
   },
   {
-    title: 'Pilates',
+    title: "Pilates",
     links: [
-      { label: 'Temel Pilates', href: '/pilates' },
-      { label: 'Pilates Nedir', href: '/pilates-nedir' },
-      { label: 'Pilates Faydaları', href: '/pilates-faydalari' },
-      { label: 'Pilates Türleri', href: '/pilates-turleri' },
+      { label: "Temel Pilates", href: "/pilates" },
+      { label: "Pilates Nedir", href: "/pilates-nedir" },
+      { label: "Pilates Faydaları", href: "/pilates-faydalari" },
+      { label: "Pilates Türleri", href: "/pilates-turleri" },
     ],
   },
   {
-    title: 'Klinik Pilates',
+    title: "Klinik Pilates",
     links: [
-      { label: 'Klinik Pilates', href: '/klinik-pilates' },
-      { label: 'Rehabilitasyon', href: '/klinik-pilates-rehabilitasyon' },
-      { label: 'Fizyoterapi', href: '/klinik-pilates-fizyoterapi' },
-      { label: 'Sağlık Pilates', href: '/saglik-pilates' },
+      { label: "Klinik Pilates", href: "/klinik-pilates" },
+      { label: "Rehabilitasyon", href: "/klinik-pilates-rehabilitasyon" },
+      { label: "Fizyoterapi", href: "/klinik-pilates-fizyoterapi" },
+      { label: "Sağlık Pilates", href: "/saglik-pilates" },
     ],
   },
   {
-    title: 'Reformer Pilates',
+    title: "Reformer Pilates",
     links: [
-      { label: 'Reformer Pilates', href: '/reformer-pilates' },
-      { label: 'Reformer Pilates Piriformis', href: '/reformer-pilates-piriformis' },
-      { label: 'Reformer Pilates Yıldız', href: '/reformer-pilates-yildiz-kirkkonaklar' },
-      { label: 'Erkekler İçin Reformer Pilates', href: '/erkekler-icin-reformer-pilates-ankara' },
-      { label: 'Aletli Pilates', href: '/aletli-pilates' },
-      { label: 'En İyi Reformer Pilates', href: '/reformer-pilates-ankara-en-iyi-hoca' },
+      { label: "Reformer Pilates", href: "/reformer-pilates" },
+      {
+        label: "Reformer Pilates Piriformis",
+        href: "/reformer-pilates-piriformis",
+      },
+      {
+        label: "Reformer Pilates Yıldız",
+        href: "/reformer-pilates-yildiz-kirkkonaklar",
+      },
+      {
+        label: "Erkekler İçin Reformer Pilates",
+        href: "/erkekler-icin-reformer-pilates-ankara",
+      },
+      { label: "Aletli Pilates", href: "/aletli-pilates" },
+      {
+        label: "En İyi Reformer Pilates",
+        href: "/reformer-pilates-ankara-en-iyi-hoca",
+      },
     ],
   },
   {
-    title: 'Mat Pilates',
+    title: "Mat Pilates",
     links: [
-      { label: 'Mat Pilates', href: '/mat-pilates' },
-      { label: 'Evde Pilates', href: '/evde-mat-pilates' },
-      { label: 'Başlangıç Mat Pilates', href: '/baslangic-mat-pilates' },
-      { label: 'İleri Mat Pilates', href: '/ileri-mat-pilates' },
+      { label: "Mat Pilates", href: "/mat-pilates" },
+      { label: "Evde Pilates", href: "/evde-mat-pilates" },
+      { label: "Başlangıç Mat Pilates", href: "/baslangic-mat-pilates" },
+      { label: "İleri Mat Pilates", href: "/ileri-mat-pilates" },
     ],
   },
 ];
 
 export default function Footer() {
+  const address =
+    "Çakmaklı Mah. Hadımköy Yolu Cad. No: 53, Büyükçekmece/İstanbul";
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -65,27 +86,27 @@ export default function Footer() {
               <span className="ml-2 text-xl font-bold">D-Balance Pilates</span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Ankara'nın en deneyimli pilates stüdyosu. Uzman eğitmenlerimizle 
+              Ankara'nın en deneyimli pilates stüdyosu. Uzman eğitmenlerimizle
               vücudunuzu güçlendirin, yaşam kalitenizi artırın.
             </p>
-            
+
             <div className="space-y-3">
               <div className="flex items-center">
                 <MapPin className="h-5 w-5 text-primary mr-3" />
-                <span className="text-gray-300">{process.env.ADDRESS || 'Ankara, Türkiye'}</span>
+                <span className="text-gray-300">{address}</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-5 w-5 text-primary mr-3" />
-                <a 
+                <a
                   href={`tel:${process.env.PHONE_NUMBER}`}
                   className="text-gray-300 hover:text-primary transition-colors"
                 >
-                  {process.env.PHONE_NUMBER || '+90 555 123 45 67'}
+                  {process.env.PHONE_NUMBER || "+90 555 123 45 67"}
                 </a>
               </div>
               <div className="flex items-center">
                 <Mail className="h-5 w-5 text-primary mr-3" />
-                <a 
+                <a
                   href="mailto:info@dbalancepilates.com"
                   className="text-gray-300 hover:text-primary transition-colors"
                 >
@@ -95,13 +116,22 @@ export default function Footer() {
             </div>
 
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-primary transition-colors"
+              >
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-primary transition-colors"
+              >
                 <Facebook className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-primary transition-colors"
+              >
                 <Twitter className="h-6 w-6" />
               </a>
             </div>
@@ -114,7 +144,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.href}>
-                    <Link 
+                    <Link
                       href={link.href}
                       className="text-gray-300 hover:text-primary transition-colors text-sm"
                     >
@@ -133,10 +163,16 @@ export default function Footer() {
               © 2024 D-Balance Pilates Studio. Tüm hakları saklıdır.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/gizlilik-politikasi" className="text-gray-400 hover:text-primary text-sm transition-colors">
+              <Link
+                href="/gizlilik-politikasi"
+                className="text-gray-400 hover:text-primary text-sm transition-colors"
+              >
                 Gizlilik Politikası
               </Link>
-              <Link href="/kullanim-kosullari" className="text-gray-400 hover:text-primary text-sm transition-colors">
+              <Link
+                href="/kullanim-kosullari"
+                className="text-gray-400 hover:text-primary text-sm transition-colors"
+              >
                 Kullanım Koşulları
               </Link>
             </div>

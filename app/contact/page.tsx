@@ -14,11 +14,10 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  const phoneNumber =
-    process.env.NEXT_PUBLIC_PHONE_NUMBER || "+90 505 586 15 38";
-  const whatsappNumber =
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "905551234567";
-  const address = process.env.ADDRESS || "Ankara, Türkiye";
+  const phoneNumber = "+90 505 586 15 38";
+  const whatsappNumber = "905551234567";
+  const address =
+    "Çakmaklı Mah. Hadımköy Yolu Cad. No: 53, Büyükçekmece/İstanbul";
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">

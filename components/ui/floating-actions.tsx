@@ -5,8 +5,8 @@ import WhatsApp from "./whatsapp";
 import Phone from "./phone";
 
 export default function FloatingActions() {
-  const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER;
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  const phoneNumber = "+90 505 586 15 38";
+  const whatsappNumber = "905055861538";
   const message = encodeURIComponent(
     "Merhaba, D-Balance Pilates hakkında bilgi almak istiyorum."
   );
