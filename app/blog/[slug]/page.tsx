@@ -75,7 +75,6 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   // In a real app, you would fetch the blog post here
-  console.log(params);
   const blog = mockBlog;
 
   if (!blog) {

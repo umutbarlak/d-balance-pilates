@@ -9,8 +9,6 @@ export async function POST(req: NextRequest) {
 
     const { email, password } = await req.json();
 
-    console.log(email, password);
-
     const user = await Admin.findOne({ email });
     if (!user) {
       return NextResponse.json(

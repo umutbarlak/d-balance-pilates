@@ -32,9 +32,6 @@ export async function generateMetadata({
   await dbConnect();
   const page: IPage | null = await getPageBySlug(slug);
 
-  console.log("page isArray?", Array.isArray(page));
-  console.log("page:", page);
-
   if (!page) {
     return {
       title: "Sayfa Bulunamadı | D-Balance Pilates",

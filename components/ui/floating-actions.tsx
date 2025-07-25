@@ -11,8 +11,6 @@ export default function FloatingActions() {
     "Merhaba, D-Balance Pilates hakkında bilgi almak istiyorum."
   );
 
-  console.log(whatsappNumber, phoneNumber);
-
   return (
     <>
       {/* Phone Button - Left */}
