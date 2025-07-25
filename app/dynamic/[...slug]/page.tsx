@@ -1,18 +1,27 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import dbConnect from "@/lib/mongodb";
 import { getPageBySlug, getRelatedPages } from "@/lib/page";
-import { get } from "node:http";
+
+export interface IPage {
+  _id: string;
+  title: string;
+  slug: string;
+  content: string;
+  metaTitle?: string; // make sure this is here
+  metaDescription?: string;
+  category: string;
+  subcategory?: string;
+  image: string;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v?: number;
+}
 
 export async function generateMetadata({
   params,
@@ -21,7 +30,10 @@ export async function generateMetadata({
 }) {
   const slug = params.slug.join("/");
   await dbConnect();
-  const page = await getPageBySlug(slug);
+  const page: IPage | null = await getPageBySlug(slug);
+
+  console.log("page isArray?", Array.isArray(page));
+  console.log("page:", page);
 
   if (!page) {
     return {
@@ -107,7 +119,7 @@ export default async function DynamicPage({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPages.map((p) => (
                 <Card
-                  key={p._id}
+                  key={p._id as string}
                   className="group hover:shadow-lg transition-shadow"
                 >
                   <div className="relative h-32 overflow-hidden rounded-t-lg">
