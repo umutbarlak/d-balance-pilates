@@ -1,12 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Plus, Edit, Trash2, Eye, ArrowUp, ArrowDown } from 'lucide-react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Plus, Edit, Trash2, Eye, ArrowUp, ArrowDown } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,7 +23,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 
 interface HeroSlide {
   _id: string;
@@ -42,13 +48,13 @@ export default function AdminHeroSlidesPage() {
 
   const fetchSlides = async () => {
     try {
-      const response = await fetch('/api/admin/hero-slides');
+      const response = await fetch("/api/admin/hero-slides");
       if (response.ok) {
         const data = await response.json();
         setSlides(data.sort((a: HeroSlide, b: HeroSlide) => a.order - b.order));
       }
     } catch (error) {
-      console.error('Failed to fetch slides:', error);
+      console.error("Failed to fetch slides:", error);
     } finally {
       setLoading(false);
     }
@@ -57,22 +63,22 @@ export default function AdminHeroSlidesPage() {
   const deleteSlide = async (id: string) => {
     try {
       const response = await fetch(`/api/admin/hero-slides/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       if (response.ok) {
-        setSlides(slides.filter(slide => slide._id !== id));
+        setSlides(slides.filter((slide) => slide._id !== id));
       }
     } catch (error) {
-      console.error('Failed to delete slide:', error);
+      console.error("Failed to delete slide:", error);
     }
   };
 
   const updateOrder = async (id: string, newOrder: number) => {
     try {
       const response = await fetch(`/api/admin/hero-slides/${id}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ order: newOrder }),
       });
@@ -80,20 +86,20 @@ export default function AdminHeroSlidesPage() {
         fetchSlides(); // Refresh the list
       }
     } catch (error) {
-      console.error('Failed to update order:', error);
+      console.error("Failed to update order:", error);
     }
   };
 
-  const moveSlide = (index: number, direction: 'up' | 'down') => {
+  const moveSlide = (index: number, direction: "up" | "down") => {
     const newSlides = [...slides];
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+
     if (targetIndex < 0 || targetIndex >= newSlides.length) return;
-    
+
     // Swap orders
     const currentSlide = newSlides[index];
     const targetSlide = newSlides[targetIndex];
-    
+
     updateOrder(currentSlide._id, targetSlide.order);
     updateOrder(targetSlide._id, currentSlide.order);
   };
@@ -117,7 +123,9 @@ export default function AdminHeroSlidesPage() {
     <div className="p-8">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Hero Slayt Yönetimi</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Hero Slayt Yönetimi
+          </h1>
           <p className="text-gray-600">Ana sayfa hero slaytlarınızı yönetin</p>
         </div>
         <Button asChild>
@@ -132,7 +140,7 @@ export default function AdminHeroSlidesPage() {
         <Card>
           <CardContent className="p-12 text-center">
             <div className="text-gray-400 mb-4">
-              <Image className="h-12 w-12 mx-auto" />
+              <Image src={""} alt="Hero Slide" width={500} height={300} />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">
               Henüz hero slaytı yok
@@ -162,7 +170,7 @@ export default function AdminHeroSlidesPage() {
                       className="object-cover"
                     />
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
                       <div>
@@ -174,21 +182,21 @@ export default function AdminHeroSlidesPage() {
                         </p>
                       </div>
                       <div className="flex items-center gap-2 ml-4">
-                        <Badge variant={slide.isActive ? "default" : "secondary"}>
+                        <Badge
+                          variant={slide.isActive ? "default" : "secondary"}
+                        >
                           {slide.isActive ? "Aktif" : "Pasif"}
                         </Badge>
-                        <Badge variant="outline">
-                          Sıra: {slide.order}
-                        </Badge>
+                        <Badge variant="outline">Sıra: {slide.order}</Badge>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between mt-4">
                       <div className="flex items-center gap-2">
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => moveSlide(index, 'up')}
+                          onClick={() => moveSlide(index, "up")}
                           disabled={index === 0}
                         >
                           <ArrowUp className="h-4 w-4" />
@@ -196,13 +204,13 @@ export default function AdminHeroSlidesPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => moveSlide(index, 'down')}
+                          onClick={() => moveSlide(index, "down")}
                           disabled={index === slides.length - 1}
                         >
                           <ArrowDown className="h-4 w-4" />
                         </Button>
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <Button asChild size="sm" variant="outline">
                           <Link href={slide.ctaLink} target="_blank">
@@ -223,9 +231,12 @@ export default function AdminHeroSlidesPage() {
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
-                              <AlertDialogTitle>Hero slaytını sil</AlertDialogTitle>
+                              <AlertDialogTitle>
+                                Hero slaytını sil
+                              </AlertDialogTitle>
                               <AlertDialogDescription>
-                                Bu işlem geri alınamaz. Hero slaytı kalıcı olarak silinecek.
+                                Bu işlem geri alınamaz. Hero slaytı kalıcı
+                                olarak silinecek.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
