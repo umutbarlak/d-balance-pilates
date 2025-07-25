@@ -13,14 +13,25 @@ export async function getRecentBlogs(limit: number = 3) {
     .sort({ createdAt: -1 })
     .limit(limit)
     .lean();
-  return blogs;
+  return blogs.map((blog) => ({
+    ...blog,
+    _id: (blog._id as string | { toString(): string }).toString(),
+    createdAt: new Date(blog.createdAt).toISOString(),
+    __v: blog.__v ?? 0, // güvenlik için fallback
+  }));
 }
 export async function getAllBlogs(limit: number = 10) {
   await dbConnect();
   const blogs = await Blog.find({ isPublished: true })
-    .select("-__v,")
+    .select("-__v")
     .sort({ createdAt: -1 })
     .limit(limit)
     .lean();
-  return blogs;
+
+  return blogs.map((blog) => ({
+    ...blog,
+    _id: (blog._id as string | { toString(): string }).toString(),
+    createdAt: new Date(blog.createdAt).toISOString(),
+    __v: blog.__v ?? 0, // güvenlik için fallback
+  }));
 }

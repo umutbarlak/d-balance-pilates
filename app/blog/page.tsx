@@ -80,7 +80,16 @@ function BlogGrid({ blogs }: { blogs: Blog[] }) {
 
 export default async function BlogPage() {
   await dbConnect();
-  const blogs: Blog[] = await getAllBlogs();
+  const rawBlogs = await getAllBlogs();
+  const blogs: Blog[] = rawBlogs.map((b: any) => ({
+    _id: b._id,
+    createdAt: b.createdAt,
+    __v: b.__v,
+    title: b.title ?? "",
+    slug: b.slug ?? "",
+    excerpt: b.excerpt ?? "",
+    image: b.image ?? "",
+  }));
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">

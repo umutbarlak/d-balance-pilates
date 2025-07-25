@@ -22,7 +22,7 @@ export interface Blog {
   excerpt: string;
   image: string;
   createdAt: string;
-  __v: number;
+  __v?: number;
 }
 
 const defaultBlogs = [
@@ -81,7 +81,16 @@ export default async function BlogSection() {
   // }, []);
 
   await dbConnect();
-  const blogs: Blog[] = await getRecentBlogs();
+  const rawBlogs = await getRecentBlogs();
+  const blogs: Blog[] = rawBlogs.map((b: any) => ({
+    _id: b._id,
+    createdAt: b.createdAt,
+    __v: b.__v,
+    title: b.title ?? "",
+    slug: b.slug ?? "",
+    excerpt: b.excerpt ?? "",
+    image: b.image ?? "",
+  }));
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("tr-TR", {
