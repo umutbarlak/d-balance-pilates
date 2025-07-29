@@ -3,8 +3,6 @@ import { SVGProps } from "react";
 const WhatsApp = (props: SVGProps<SVGSVGElement>) => (
   <svg
     fill="#fff"
-    width="100px"
-    height="100px"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
