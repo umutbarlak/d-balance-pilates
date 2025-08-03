@@ -2,7 +2,6 @@
 import { IPage } from "@/app/dynamic/[...slug]/page";
 import Page from "./models/Page";
 import dbConnect from "./mongodb";
-import Blog from "@/lib/models/Blog";
 
 export async function getPageBySlug(slug: string) {
   await dbConnect();

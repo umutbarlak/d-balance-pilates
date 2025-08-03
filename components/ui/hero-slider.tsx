@@ -1,21 +1,25 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface HeroSlide {
   _id: string;
   title: string;
   description: string;
   image: string;
+  isActive: boolean;
+  order: number;
+  createdAt: string;
+  __v: number;
   ctaText: string;
   ctaLink: string;
 }
@@ -27,11 +31,11 @@ export default function HeroSlider() {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const response = await fetch('/api/hero-slides');
+        const response = await fetch("/api/hero-slides");
         const data = await response.json();
         setSlides(data);
       } catch (error) {
-        console.error('Failed to fetch hero slides:', error);
+        console.error("Failed to fetch hero slides:", error);
       } finally {
         setLoading(false);
       }
@@ -86,9 +90,7 @@ export default function HeroSlider() {
                     {slide.description}
                   </p>
                   <Button asChild size="lg" className="text-lg px-8 py-3">
-                    <Link href={slide.ctaLink}>
-                      {slide.ctaText}
-                    </Link>
+                    <Link href={slide.ctaLink}>{slide.ctaText}</Link>
                   </Button>
                 </div>
               </div>

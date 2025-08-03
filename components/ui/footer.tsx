@@ -7,6 +7,8 @@ import {
   Facebook,
   Twitter,
 } from "lucide-react";
+import { getFooterLinks } from "@/lib/footer";
+import dbConnect from "@/lib/mongodb";
 
 const footerSections = [
   {
@@ -70,7 +72,12 @@ const footerSections = [
   },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  await dbConnect();
+  const footerLinks = await getFooterLinks();
+
+  console.log(footerLinks);
+
   const address =
     "Çakmaklı Mah. Hadımköy Yolu Cad. No: 53, Büyükçekmece/İstanbul";
   return (
@@ -138,17 +145,17 @@ export default function Footer() {
           </div>
 
           {/* Footer Links */}
-          {footerSections.map((section) => (
-            <div key={section.title}>
-              <h3 className="font-semibold text-lg mb-4">{section.title}</h3>
+          {footerLinks.map((section) => (
+            <div key={section.category}>
+              <h3 className="font-semibold text-lg mb-4">{section.category}</h3>
               <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.href}>
+                {section.pages.map((link) => (
+                  <li key={link.slug}>
                     <Link
-                      href={link.href}
+                      href={link.slug}
                       className="text-gray-300 hover:text-primary transition-colors text-sm"
                     >
-                      {link.label}
+                      {link.title}
                     </Link>
                   </li>
                 ))}

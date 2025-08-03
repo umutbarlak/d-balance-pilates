@@ -20,7 +20,7 @@ const defaultMenuItems: MenuItem[] = [
       { label: "Hakkımızda", href: "/hakkimizda" },
       { label: "Postür Değerlendirme", href: "/postur-degerlendirme" },
       { label: "Ekibimiz", href: "/ekibimiz" },
-      { label: "İletişim", href: "/contact" },
+      { label: "İletişim", href: "/iletisim" },
     ],
   },
   {
@@ -30,6 +30,7 @@ const defaultMenuItems: MenuItem[] = [
       { label: "Pilates", href: "/pilates" },
       { label: "Klinik Pilates", href: "/klinik-pilates" },
       { label: "Reformer Pilates", href: "/reformer-pilates" },
+      { label: "Mat Pilates", href: "/mat-pilates" },
       { label: "Bloglar", href: "/blog" },
     ],
   },

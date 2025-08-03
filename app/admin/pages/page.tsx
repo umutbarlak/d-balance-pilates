@@ -1,12 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Plus, Edit, Trash2, Eye, Calendar, Folder } from 'lucide-react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Plus, Edit, Trash2, Eye, Calendar, Folder } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,7 +23,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 
 interface Page {
   _id: string;
@@ -41,13 +47,13 @@ export default function AdminPagesPage() {
 
   const fetchPages = async () => {
     try {
-      const response = await fetch('/api/admin/pages');
+      const response = await fetch("/api/admin/pages");
       if (response.ok) {
         const data = await response.json();
         setPages(data);
       }
     } catch (error) {
-      console.error('Failed to fetch pages:', error);
+      console.error("Failed to fetch pages:", error);
     } finally {
       setLoading(false);
     }
@@ -56,30 +62,31 @@ export default function AdminPagesPage() {
   const deletePage = async (id: string) => {
     try {
       const response = await fetch(`/api/admin/pages/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       if (response.ok) {
-        setPages(pages.filter(page => page._id !== id));
+        setPages(pages.filter((page) => page._id !== id));
       }
     } catch (error) {
-      console.error('Failed to delete page:', error);
+      console.error("Failed to delete page:", error);
     }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('tr-TR', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+    return new Date(dateString).toLocaleDateString("tr-TR", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string } = {
-      'pilates': 'bg-blue-100 text-blue-800',
-      'kurumsal': 'bg-green-100 text-green-800',
-      'hizmetler': 'bg-purple-100 text-purple-800',
-      'default': 'bg-gray-100 text-gray-800',
+      pilates: "bg-blue-100 text-blue-800",
+      "klinik pilates": "bg-green-100 text-green-800",
+      "reformer pilates": "bg-purple-100 text-purple-800",
+      "mat pilates": "bg-orange-100 text-orange-800",
+      default: "bg-gray-100 text-gray-800",
     };
     return colors[category] || colors.default;
   };
@@ -137,7 +144,10 @@ export default function AdminPagesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pages.map((page) => (
-            <Card key={page._id} className="group hover:shadow-lg transition-shadow">
+            <Card
+              key={page._id}
+              className="group hover:shadow-lg transition-shadow"
+            >
               {page.image && (
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
                   <Image
@@ -153,7 +163,7 @@ export default function AdminPagesPage() {
                   </div>
                 </div>
               )}
-              
+
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className={getCategoryColor(page.category)}>
@@ -173,16 +183,21 @@ export default function AdminPagesPage() {
                   {formatDate(page.createdAt)}
                 </div>
               </CardHeader>
-              
+
               <CardContent className="pt-0">
                 <div className="text-sm text-gray-600 mb-4">
                   <code className="bg-gray-100 px-2 py-1 rounded text-xs">
                     /{page.slug}
                   </code>
                 </div>
-                
+
                 <div className="flex gap-2">
-                  <Button asChild size="sm" variant="outline" className="flex-1">
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="flex-1"
+                  >
                     <Link href={`/${page.slug}`} target="_blank">
                       <Eye className="h-4 w-4 mr-1" />
                       Görüntüle

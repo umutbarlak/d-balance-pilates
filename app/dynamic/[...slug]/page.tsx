@@ -29,6 +29,7 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   const slug = params.slug.join("/");
+  console.log(slug);
   await dbConnect();
   const page: IPage | null = await getPageBySlug(slug);
 
@@ -58,7 +59,6 @@ export default async function DynamicPage({
   const slug = params.slug.join("/");
   await dbConnect();
   const page = await getPageBySlug(slug);
-  // const page = mockPages[slug as keyof typeof mockPages];
 
   if (!page) {
     notFound();
