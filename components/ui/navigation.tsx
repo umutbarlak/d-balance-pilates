@@ -49,8 +49,10 @@ export default function Navigation() {
             <div className="flex items-center">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                 <Image
+                  width={100}
+                  height={100}
                   className="w-10 h-10"
-                  src="/logo"
+                  src="/logo.png"
                   alt="d-balance pilates"
                 />
               </div>
