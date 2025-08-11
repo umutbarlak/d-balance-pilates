@@ -1,60 +1,73 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowLeft, Upload, Save } from 'lucide-react';
-import Link from 'next/link';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { ArrowLeft, Upload, Save } from "lucide-react";
+import Link from "next/link";
 
 export default function NewPagePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [imageUploading, setImageUploading] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    content: '',
-    category: '',
-    subcategory: '',
-    image: '',
-    metaTitle: '',
-    metaDescription: '',
+    title: "",
+    slug: "",
+    content: "",
+    category: "",
+    subcategory: "",
+    image: "",
+    metaTitle: "",
+    metaDescription: "",
     isPublished: true,
   });
 
   const categories = [
-    { value: 'pilates', label: 'Pilates' },
-    { value: 'kurumsal', label: 'Kurumsal' },
-    { value: 'hizmetler', label: 'Hizmetler' },
+    { value: "pilates", label: "Pilates" },
+    { value: "klinik pilates", label: "Klinik Pilates" },
+    { value: "mat pilates", label: "Mat Pilates" },
+    { value: "reformer pilates", label: "Reformer Pilates" },
   ];
 
   const generateSlug = (title: string) => {
     return title
       .toLowerCase()
-      .replace(/ğ/g, 'g')
-      .replace(/ü/g, 'u')
-      .replace(/ş/g, 's')
-      .replace(/ı/g, 'i')
-      .replace(/ö/g, 'o')
-      .replace(/ç/g, 'c')
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
+      .replace(/ğ/g, "g")
+      .replace(/ü/g, "u")
+      .replace(/ş/g, "s")
+      .replace(/ı/g, "i")
+      .replace(/ö/g, "o")
+      .replace(/ç/g, "c")
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
       .trim();
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       title,
       slug: generateSlug(title),
@@ -62,8 +75,10 @@ export default function NewPagePage() {
     }));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
@@ -75,22 +90,22 @@ export default function NewPagePage() {
 
     setImageUploading(true);
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
+      const response = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
       });
 
       if (response.ok) {
         const data = await response.json();
-        setFormData(prev => ({ ...prev, image: data.url }));
+        setFormData((prev) => ({ ...prev, image: data.url }));
       } else {
-        setError('Resim yüklenirken hata oluştu');
+        setError("Resim yüklenirken hata oluştu");
       }
     } catch (error) {
-      setError('Resim yüklenirken hata oluştu');
+      setError("Resim yüklenirken hata oluştu");
     } finally {
       setImageUploading(false);
     }
@@ -99,25 +114,25 @@ export default function NewPagePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const response = await fetch('/api/admin/pages', {
-        method: 'POST',
+      const response = await fetch("/api/admin/pages", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        router.push('/admin/pages');
+        router.push("/admin/pages");
       } else {
         const data = await response.json();
-        setError(data.error || 'Sayfa oluşturulurken hata oluştu');
+        setError(data.error || "Sayfa oluşturulurken hata oluştu");
       }
     } catch (error) {
-      setError('Bir hata oluştu. Lütfen tekrar deneyin.');
+      setError("Bir hata oluştu. Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);
     }
@@ -148,7 +163,9 @@ export default function NewPagePage() {
             <Card>
               <CardHeader>
                 <CardTitle>Temel Bilgiler</CardTitle>
-                <CardDescription>Sayfanın temel bilgilerini girin</CardDescription>
+                <CardDescription>
+                  Sayfanın temel bilgilerini girin
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -180,14 +197,19 @@ export default function NewPagePage() {
                     <Label htmlFor="category">Kategori *</Label>
                     <Select
                       value={formData.category}
-                      onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({ ...prev, category: value }))
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Kategori seçin" />
                       </SelectTrigger>
                       <SelectContent>
                         {categories.map((category) => (
-                          <SelectItem key={category.value} value={category.value}>
+                          <SelectItem
+                            key={category.value}
+                            value={category.value}
+                          >
                             {category.label}
                           </SelectItem>
                         ))}
@@ -225,7 +247,9 @@ export default function NewPagePage() {
             <Card>
               <CardHeader>
                 <CardTitle>SEO Ayarları</CardTitle>
-                <CardDescription>Arama motoru optimizasyonu için meta bilgiler</CardDescription>
+                <CardDescription>
+                  Arama motoru optimizasyonu için meta bilgiler
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -264,8 +288,8 @@ export default function NewPagePage() {
                   <Switch
                     id="isPublished"
                     checked={formData.isPublished}
-                    onCheckedChange={(checked) => 
-                      setFormData(prev => ({ ...prev, isPublished: checked }))
+                    onCheckedChange={(checked) =>
+                      setFormData((prev) => ({ ...prev, isPublished: checked }))
                     }
                   />
                   <Label htmlFor="isPublished">Yayınla</Label>
@@ -276,7 +300,9 @@ export default function NewPagePage() {
             <Card>
               <CardHeader>
                 <CardTitle>Öne Çıkan Resim</CardTitle>
-                <CardDescription>Sayfa için ana resim (opsiyonel)</CardDescription>
+                <CardDescription>
+                  Sayfa için ana resim (opsiyonel)
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {formData.image ? (
@@ -292,7 +318,9 @@ export default function NewPagePage() {
                     <Button
                       type="button"
                       variant="outline"
-                      onClick={() => setFormData(prev => ({ ...prev, image: '' }))}
+                      onClick={() =>
+                        setFormData((prev) => ({ ...prev, image: "" }))
+                      }
                     >
                       Resmi Kaldır
                     </Button>
@@ -303,7 +331,9 @@ export default function NewPagePage() {
                       <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                         <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
                         <p className="text-sm text-gray-600">
-                          {imageUploading ? 'Yükleniyor...' : 'Resim yüklemek için tıklayın'}
+                          {imageUploading
+                            ? "Yükleniyor..."
+                            : "Resim yüklemek için tıklayın"}
                         </p>
                       </div>
                     </Label>
@@ -323,7 +353,7 @@ export default function NewPagePage() {
             <div className="flex gap-4">
               <Button type="submit" disabled={loading} className="flex-1">
                 <Save className="h-4 w-4 mr-2" />
-                {loading ? 'Kaydediliyor...' : 'Kaydet'}
+                {loading ? "Kaydediliyor..." : "Kaydet"}
               </Button>
             </div>
           </div>
