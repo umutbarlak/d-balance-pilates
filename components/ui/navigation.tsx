@@ -48,7 +48,11 @@ export default function Navigation() {
           <Link href="/" className="flex-shrink-0">
             <div className="flex items-center">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
+                <Image
+                  className="w-10 h-10"
+                  src="/logo"
+                  alt="d-balance pilates"
+                />
               </div>
               <span className="ml-2 text-xl font-bold text-gray-900">
                 D-Balance Pilates

@@ -77,7 +77,7 @@ export default function HeroSlider() {
                 src={slide.image}
                 alt={slide.title}
                 fill
-                className="object-cover"
+                className="object-cover h-[calc(100vh-2rem)]"
                 priority
               />
               <div className="absolute inset-0 bg-black/40" />

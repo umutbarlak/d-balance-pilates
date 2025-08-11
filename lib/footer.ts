@@ -28,6 +28,5 @@ export const getFooterLinks = async () => {
     },
     { $sort: { category: 1 } },
   ]);
-  console.log(grouped[0].pages);
   return grouped;
 };

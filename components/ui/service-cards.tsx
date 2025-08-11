@@ -1,43 +1,53 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Activity, Heart, Dumbbell, User } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Activity, Heart, Dumbbell, User } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const serviceIcons = {
   pilates: Activity,
-  'klinik-pilates': Heart,
-  'reformer-pilates': Dumbbell,
-  'mat-pilates': User,
+  "klinik-pilates": Heart,
+  "reformer-pilates": Dumbbell,
+  "mat-pilates": User,
 };
 
 const defaultServices = [
   {
-    title: 'Pilates',
-    slug: 'pilates',
-    description: 'Güçlü bir vücut ve zihin için temel pilates egzersizleri',
-    image: 'https://images.pexels.com/photos/3823039/pexels-photo-3823039.jpeg?auto=compress&cs=tinysrgb&w=600',
+    title: "Pilates",
+    slug: "pilates",
+    description: "Güçlü bir vücut ve zihin için temel pilates egzersizleri",
+    image:
+      "https://res.cloudinary.com/da0fgi2si/image/upload/v1754506286/pilates-studio/2150830123_parcnv.jpg",
   },
   {
-    title: 'Klinik Pilates',
-    slug: 'klinik-pilates',
-    description: 'Fizyoterapist eşliğinde rehabilitasyon odaklı pilates',
-    image: 'https://images.pexels.com/photos/3823099/pexels-photo-3823099.jpeg?auto=compress&cs=tinysrgb&w=600',
+    title: "Klinik Pilates",
+    slug: "klinik-pilates",
+    description: "Fizyoterapist eşliğinde rehabilitasyon odaklı pilates",
+    image:
+      "https://res.cloudinary.com/da0fgi2si/image/upload/v1754506287/pilates-studio/2150858066_cgnc6f.jpg",
   },
   {
-    title: 'Reformer Pilates',
-    slug: 'reformer-pilates',
-    description: 'Modern aletlerle desteklenmiş ileri seviye pilates',
-    image: 'https://images.pexels.com/photos/3823098/pexels-photo-3823098.jpeg?auto=compress&cs=tinysrgb&w=600',
+    title: "Reformer Pilates",
+    slug: "reformer-pilates",
+    description: "Modern aletlerle desteklenmiş ileri seviye pilates",
+    image:
+      "https://res.cloudinary.com/da0fgi2si/image/upload/v1754506287/pilates-studio/2150830112_nqfpgm.jpg",
   },
   {
-    title: 'Mat Pilates',
-    slug: 'mat-pilates',
-    description: 'Matla yapılan temel pilates hareketleri',
-    image: 'https://images.pexels.com/photos/3823041/pexels-photo-3823041.jpeg?auto=compress&cs=tinysrgb&w=600',
+    title: "Mat Pilates",
+    slug: "mat-pilates",
+    description: "Matla yapılan temel pilates hareketleri",
+    image:
+      "https://res.cloudinary.com/da0fgi2si/image/upload/v1754506287/pilates-studio/2148924700_pynbds.jpg",
   },
 ];
 
@@ -52,16 +62,22 @@ export default function ServiceCards() {
             Neler Yapıyoruz
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Uzman eğitmenlerimizle birlikte vücudunuzu güçlendirin ve yaşam kalitenizi artırın
+            Uzman eğitmenlerimizle birlikte vücudunuzu güçlendirin ve yaşam
+            kalitenizi artırın
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => {
-            const IconComponent = serviceIcons[service.slug as keyof typeof serviceIcons] || Activity;
-            
+            const IconComponent =
+              serviceIcons[service.slug as keyof typeof serviceIcons] ||
+              Activity;
+
             return (
-              <Card key={service.slug} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+              <Card
+                key={service.slug}
+                className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
+              >
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
                   <Image
                     src={service.image}
@@ -76,22 +92,24 @@ export default function ServiceCards() {
                     </div>
                   </div>
                 </div>
-                
+
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xl font-bold text-gray-900">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
-                
+
                 <CardContent className="pt-0">
                   <CardDescription className="text-gray-600 mb-4 leading-relaxed">
                     {service.description}
                   </CardDescription>
-                  
-                  <Button asChild variant="outline" className="w-full group-hover:bg-primary group-hover:text-white transition-colors">
-                    <Link href={`/${service.slug}`}>
-                      Detayları Gör
-                    </Link>
+
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
+                  >
+                    <Link href={`/${service.slug}`}>Detayları Gör</Link>
                   </Button>
                 </CardContent>
               </Card>

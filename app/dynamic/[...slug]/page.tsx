@@ -29,7 +29,6 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   const slug = params.slug.join("/");
-  console.log(slug);
   await dbConnect();
   const page: IPage | null = await getPageBySlug(slug);
 

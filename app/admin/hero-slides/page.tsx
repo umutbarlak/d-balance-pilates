@@ -25,7 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-interface HeroSlide {
+export interface HeroSlide {
   _id: string;
   title: string;
   description: string;
@@ -118,6 +118,8 @@ export default function AdminHeroSlidesPage() {
       </div>
     );
   }
+
+  console.log(slides);
 
   return (
     <div className="p-8">

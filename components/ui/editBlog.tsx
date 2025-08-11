@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Save } from "lucide-react";
+import { Save, Upload } from "lucide-react";
 import Image from "next/image";
 
 export default function EditBlogForm({ initialData }: { initialData: any }) {
@@ -54,6 +54,10 @@ export default function EditBlogForm({ initialData }: { initialData: any }) {
     }
   };
 
+  const handleRemoveImage = () => {
+    setFormData((prev: any) => ({ ...prev, image: "" }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -61,7 +65,7 @@ export default function EditBlogForm({ initialData }: { initialData: any }) {
 
     try {
       const res = await fetch(`/api/admin/blogs/${formData.id}`, {
-        method: "PUT",
+        method: "PATCH", // PUT yerine PATCH kullan
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
@@ -159,21 +163,43 @@ export default function EditBlogForm({ initialData }: { initialData: any }) {
 
       <div>
         <Label>Görsel</Label>
-        {formData.image && (
-          <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
-            <Image
-              src={formData.image}
-              alt="Görsel"
-              fill
-              className="object-cover"
+
+        {formData.image ? (
+          <div className="space-y-4">
+            <div className="relative w-full h-48 rounded overflow-hidden">
+              <Image
+                src={formData.image}
+                alt="Görsel"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <Button type="button" variant="outline" onClick={handleRemoveImage}>
+              Görseli Kaldır
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Label htmlFor="image" className="cursor-pointer">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
+                <p className="text-sm text-gray-600">
+                  {imageUploading
+                    ? "Yükleniyor..."
+                    : "Resim yüklemek için tıklayın"}
+                </p>
+              </div>
+            </Label>
+            <Input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+              disabled={imageUploading}
             />
           </div>
         )}
-        <Input
-          type="file"
-          onChange={handleImageUpload}
-          disabled={imageUploading}
-        />
       </div>
 
       <Button type="submit" disabled={loading}>

@@ -8,14 +8,14 @@ import FloatingActions from "@/components/ui/floating-actions";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "D-Balance Pilates Studio | Ankara'nın En İyi Pilates Merkezi",
+  title: "D-Balance Pilates Studio | İstanbul'un En İyi Pilates Merkezi",
   description:
-    "Ankara'da pilates, klinik pilates, reformer pilates ve mat pilates dersleri. Uzman eğitmenlerimizle vücudunuzu güçlendirin.",
+    "İstanbulda'da pilates, klinik pilates, reformer pilates ve mat pilates dersleri. Uzman eğitmenlerimizle vücudunuzu güçlendirin.",
   keywords:
-    "pilates ankara, reformer pilates, klinik pilates, mat pilates, pilates dersi, ankara pilates studio",
+    "pilates ankara, reformer pilates, klinik pilates, mat pilates, pilates dersi, istanbul pilates studio",
   openGraph: {
     title: "D-Balance Pilates Studio",
-    description: "Ankara'nın en deneyimli pilates stüdyosu",
+    description: "İstanbul'un en deneyimli pilates stüdyosu",
     type: "website",
   },
 };
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={inter.className}>
+      <body className={inter.className} >
         <Navigation />
         {children}
         <Footer />
