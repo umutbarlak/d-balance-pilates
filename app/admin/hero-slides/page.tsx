@@ -119,8 +119,6 @@ export default function AdminHeroSlidesPage() {
     );
   }
 
-  console.log(slides);
-
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-8">

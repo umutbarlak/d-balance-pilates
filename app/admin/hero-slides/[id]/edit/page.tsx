@@ -32,7 +32,7 @@ export default function EditHeroSlideForm({
 
   useEffect(() => {
     const fetchSlide = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         const res = await fetch(`/api/admin/hero-slides/${params.id}`);
         if (!res.ok) {
@@ -118,12 +118,9 @@ export default function EditHeroSlideForm({
     }
   };
 
-  console.log(formData);
-
- if (loading || !formData) {
-  return <div>Yükleniyor...</div>;
-}
-
+  if (loading || !formData) {
+    return <div>Yükleniyor...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-4xl space-y-8 p-10">

@@ -46,7 +46,6 @@ export default function NewPagePage() {
   const categories = [
     { value: "pilates", label: "Pilates" },
     { value: "klinik pilates", label: "Klinik Pilates" },
-    { value: "mat pilates", label: "Mat Pilates" },
     { value: "reformer pilates", label: "Reformer Pilates" },
   ];
 

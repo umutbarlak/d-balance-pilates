@@ -8,8 +8,6 @@ export async function GET(request: NextRequest) {
 
     const id = request.nextUrl.searchParams.get("id");
 
-    console.log(id);
-
     if (id) {
       const slide = await HeroSlide.findById(id);
       if (!slide) {

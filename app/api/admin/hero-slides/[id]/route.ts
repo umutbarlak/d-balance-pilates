@@ -77,8 +77,6 @@ export async function GET(
 
     const { id } = params;
 
-    console.log(id);
-
     const slide = await HeroSlide.findById(id);
     if (!slide) {
       return NextResponse.json({ error: "Slide not found" }, { status: 404 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -30,7 +30,6 @@ const defaultMenuItems: MenuItem[] = [
       { label: "Pilates", href: "/pilates" },
       { label: "Klinik Pilates", href: "/klinik-pilates" },
       { label: "Reformer Pilates", href: "/reformer-pilates" },
-      { label: "Mat Pilates", href: "/mat-pilates" },
       { label: "Bloglar", href: "/blog" },
     ],
   },
@@ -47,16 +46,16 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <div className="bg-primary rounded-full flex items-center justify-center">
                 <Image
-                  width={100}
-                  height={100}
-                  className="w-10 h-10"
+                  width={60}
+                  height={60}
+                  className="bg-white object-cover"
                   src="/logo.png"
                   alt="d-balance pilates"
                 />
               </div>
-              <span className="ml-2 text-xl font-bold text-gray-900">
+              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-400 to-orange-400 bg-clip-text text-transparent">
                 D-Balance Pilates
               </span>
             </div>

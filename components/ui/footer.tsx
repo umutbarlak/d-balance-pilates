@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { getFooterLinks } from "@/lib/footer";
 import dbConnect from "@/lib/mongodb";
+import Image from "next/image";
 
 export default async function Footer() {
   await dbConnect();
@@ -26,10 +27,18 @@ export default async function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
+              <div className="bg-primary rounded-full flex items-center justify-center overflow-hidden">
+                <Image
+                  width={80}
+                  height={80}
+                  className="bg-[#101827] object-cover"
+                  src="/logo.png"
+                  alt="d-balance pilates"
+                />
               </div>
-              <span className="ml-2 text-xl font-bold">D-Balance Pilates</span>
+              <span className="ml-2 text-xl font-bold bg-gradient-to-r from-purple-500 via-pink-400 to-orange-400 bg-clip-text text-transparent">
+                D-Balance Pilates
+              </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
               İstanbul'un en deneyimli pilates stüdyosu. Uzman eğitmenlerimizle

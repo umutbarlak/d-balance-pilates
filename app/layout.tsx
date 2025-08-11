@@ -18,6 +18,10 @@ export const metadata: Metadata = {
     description: "İstanbul'un en deneyimli pilates stüdyosu",
     type: "website",
   },
+  icons: {
+    icon: "/logo-1.png",
+    apple: "/logo-1.png",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={inter.className} >
+      <body className={inter.className}>
         <Navigation />
         {children}
         <Footer />
