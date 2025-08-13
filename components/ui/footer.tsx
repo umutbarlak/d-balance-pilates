@@ -72,22 +72,10 @@ export default async function Footer() {
 
             <div className="flex space-x-4 mt-6">
               <a
-                href="#"
+                href="https://www.instagram.com/dbalance.pilates/"
                 className="text-gray-400 hover:text-primary transition-colors"
               >
                 <Instagram className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary transition-colors"
-              >
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary transition-colors"
-              >
-                <Twitter className="h-6 w-6" />
               </a>
             </div>
           </div>
